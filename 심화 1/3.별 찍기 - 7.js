@@ -8,9 +8,9 @@ for (let i = 1; i <= input; i += 1) {
   const diff = maxCount - count;
 
   table[i] = [...'*'.repeat(count)];
-  const front = [...' '.repeat(diff / 2)];
-  const back = [...' '.repeat(diff / 2)];
-  table[i] = front.concat(table[i]).concat(back);
+  const space = [...' '.repeat(diff / 2)];
+
+  table[i] = space.concat(table[i]);
 }
 
 const up = Object.values(table);
