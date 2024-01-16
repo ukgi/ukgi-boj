@@ -1,10 +1,16 @@
 // 🔺
+const n = Number(require('fs').readFileSync('./input.txt').toString());
 
-const n = +require('fs').readFileSync('./input.txt').toString();
-let num = 666;
-let count = 1;
-while (count !== n) {
-  num++;
-  if (String(num).includes('666')) count++;
+function solution(n) {
+  let ranking = 1;
+  let tmp = 666;
+
+  while (ranking !== n) {
+    tmp += 1;
+    if (`${tmp}`.includes('666')) ranking += 1;
+  }
+
+  return tmp;
 }
-console.log(num);
+
+console.log(solution(n));
