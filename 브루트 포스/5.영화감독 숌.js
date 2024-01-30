@@ -2,15 +2,18 @@
 const n = Number(require('fs').readFileSync('./input.txt').toString());
 
 function solution(n) {
-  let ranking = 1;
-  let tmp = 666;
-
-  while (ranking !== n) {
-    tmp += 1;
-    if (`${tmp}`.includes('666')) ranking += 1;
+  let x = 666;
+  let result = 0;
+  let r = 0;
+  while (r !== n) {
+    if (x.toString().includes('666')) {
+      r++;
+      result = x;
+    }
+    x++;
   }
 
-  return tmp;
+  return result;
 }
 
 console.log(solution(n));
