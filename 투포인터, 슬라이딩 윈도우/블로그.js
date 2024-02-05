@@ -1,32 +1,25 @@
-// const input = require('fs').readFileSync('./input.txt').toString().trim().split('\n');
-// const x = Number(input[0].split(' ')[1]);
-// const arr = input[1].split(' ').map(Number);
+const input = require('fs').readFileSync(0).toString().trim().split('\n');
+const x = Number(input[0].split(' ')[1]);
+const arr = input[1].split(' ').map(Number);
 
 function solution(x, arr) {
-  const tmp = {};
-  let windowSum = 0;
-  let max = Number.MIN_SAFE_INTEGER;
-
-  for (let i = 0; i < x; i++) {
-    windowSum += arr[i];
-  }
-
+  let result = [];
+  let count = 0;
+  let sum = 0;
+  const table = {};
+  for (let i = 0; i < x; i++) sum += arr[i];
+  table[sum] = 1;
   for (let i = x; i < arr.length; i++) {
-    windowSum += arr[i] - arr[i - x];
+    sum += arr[i] - arr[i - x];
+    if (table[sum]) table[sum]++;
+    else table[sum] = 1;
+  }
+  result.push(Math.max(...Object.keys(table).map(Number)));
+  if (result[0] === 0) return 'SAD';
+  count = table[result[0]];
+  result.push(count);
 
-    if (tmp[windowSum]) tmp[windowSum]++;
-    else {
-      tmp[windowSum] = 0;
-      tmp[windowSum]++;
-    }
-  }
-  max = Math.max(...Object.keys(tmp).map(Number));
-  if (max === 0) {
-    console.log('SAD');
-  } else {
-    console.log(max);
-    console.log(tmp[max]);
-  }
+  return result.join('\n');
 }
 
-solution(2, [1, 4, 2, 5, 1]);
+console.log(solution(x, arr));
