@@ -1,8 +1,8 @@
 const input = Number(require('fs').readFileSync('./input.txt').toString().trim());
 
 function solution(x) {
-  let range = 1;
   let end = 1;
+  let range = 1;
   while (end < x) {
     end += range + 1;
     range++;

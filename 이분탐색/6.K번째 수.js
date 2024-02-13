@@ -1,25 +1,30 @@
 // 1300
 let [n, k] = require('fs').readFileSync('./input.txt').toString().trim().split('\n').map(Number);
 
+function count(n, mid) {
+  let cnt = 0;
+  for (let i = 1; i <= n; i++) {
+    if (Math.floor(mid / i) >= n) {
+      cnt += n;
+    } else {
+      cnt += Math.floor(mid / i);
+    }
+  }
+  return cnt;
+}
+
 function solution(n, k) {
   let lt = 1;
   let rt = n * n;
   let result = 0;
   while (lt <= rt) {
-    let sum = 0;
     const mid = Math.floor((lt + rt) / 2);
-    for (let i = 1; i <= n; i++) {
-      if (Math.floor(mid / i) > n) sum += n;
-      else sum += Math.floor(mid / i);
-    }
-    if (sum >= k) {
+    if (count(n, mid) < k) lt = mid + 1;
+    else {
       result = mid;
       rt = mid - 1;
-    } else {
-      lt = mid + 1;
     }
   }
-
   return result;
 }
 

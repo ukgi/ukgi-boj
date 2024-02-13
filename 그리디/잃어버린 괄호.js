@@ -1,14 +1,8 @@
 let input = require('fs').readFileSync('./input.txt').toString().trim();
 
 function solution(input) {
-  const numbers = input.split('-').map((e) =>
-    e
-      .split('+')
-      .map(Number)
-      .reduce((acc, cur) => acc + cur, 0)
-  );
-  const answer = numbers[0] * 2 - numbers.reduce((s, v) => s + v, 0);
-  return answer;
+  const temp = input.split('-').map((e) => e.split('+').reduce((acc, cur) => acc + Number(cur), 0));
+  return temp.reduce((acc, cur) => acc - cur, temp[0] * 2);
 }
 
 console.log(solution(input));
